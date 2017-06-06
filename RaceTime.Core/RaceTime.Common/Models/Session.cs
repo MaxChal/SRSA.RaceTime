@@ -9,11 +9,12 @@ namespace RaceTime.Common.Models
     {
         public string SessionID { get; set; }
         public string SessionName { get; set; }
+        public string ServerName { get; set; }
+        public string Track { get; set; }
         public eSessionType SessionType { get; set; }
-        public int NumberOfLaps { get; set; }
-        public DateTime SessionLength  { get; set; }
-        public DateTime SessionStartTime { get; set; }
-        public DateTime SessionEndTime { get; set; }
+        public int SessionLaps { get; set; }
+        public int SessionTime  { get; set; }
         public List<Competitor> Competitors { get; set; }
+        
     }
 }

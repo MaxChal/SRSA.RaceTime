@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RaceTime.AssettoCorsa.FileParser\RaceTime.AssettoCorsa.FileParser.csproj">
+      <Project>{1e9f54ef-16c4-41cf-8b76-a3d53556974c}</Project>
+      <Name>RaceTime.AssettoCorsa.FileParser</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

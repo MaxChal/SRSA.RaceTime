@@ -10,5 +10,9 @@ namespace RaceTime.Common.Models
         public int LapsLead { get; set; }
         public int Position { get; set; }
         public List<Lap> Laps { get; set; }
+        public bool ActiveDriver { get; set; }
+        public int LapsCompleted { get; set; }
+        public string CarName { get; set; }
+        public string CurrentTyre { get; set; }
     }
 }
