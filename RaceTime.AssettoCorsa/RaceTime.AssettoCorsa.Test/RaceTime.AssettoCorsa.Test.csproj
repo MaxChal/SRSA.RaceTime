@@ -49,9 +49,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\acPlugins4net\acPlugins4net.csproj">
+      <Project>{755c6b0d-3ed5-45d3-a06f-1575d26da4d9}</Project>
+      <Name>acPlugins4net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RaceTime.AssettoCorsa.FileParser\RaceTime.AssettoCorsa.FileParser.csproj">
       <Project>{1e9f54ef-16c4-41cf-8b76-a3d53556974c}</Project>
       <Name>RaceTime.AssettoCorsa.FileParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RaceTime.AssettoCorsa.ServerPlugin\RaceTime.AssettoCorsa.ServerPlugin.csproj">
+      <Project>{51767fb2-a874-4997-90af-529712027f28}</Project>
+      <Name>RaceTime.AssettoCorsa.ServerPlugin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

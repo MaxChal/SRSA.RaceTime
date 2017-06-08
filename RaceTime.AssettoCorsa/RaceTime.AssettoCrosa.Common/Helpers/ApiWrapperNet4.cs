@@ -11,7 +11,7 @@ namespace RaceTime.AssettoCrosa.Common.Helpers
 {
     public static class ApiWrapperNet4
     {
-        public static string ApiUrl = "http://localhost:61544/api/";
+        public static string ApiUrl = "http://localhost:17757/api/";
 
         public static T Get<T>(string url)
         {

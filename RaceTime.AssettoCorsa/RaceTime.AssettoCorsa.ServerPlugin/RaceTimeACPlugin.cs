@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 using acPlugins4net;
 using acPlugins4net.info;
 using acPlugins4net.messages;
+using System.IO;
 
 namespace RaceTime.AssettoCorsa.ServerPlugin
 {
     public class RaceTimeACPlugin : AcServerPlugin
     {
+        public RaceTimeACPlugin()
+        {
+            
+        }
 
+      
         protected override void OnAcServerAlive()
         {
             base.OnAcServerAlive();
@@ -34,6 +40,11 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnCarUpdate(DriverInfo driverInfo)
         {
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnCarUpdate Called {driverInfo.TotalTime} {driverInfo.Gap}");
+            }
             base.OnCarUpdate(driverInfo);
         }
 
@@ -49,7 +60,12 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnClientLoaded(MsgClientLoaded msg)
         {
-            base.OnClientLoaded(msg);
+
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnClientLoaded Called");
+            }
         }
 
         protected override void OnCollision(IncidentInfo msg)
@@ -69,7 +85,11 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnConnected()
         {
-            base.OnConnected();
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnConnectied Called");
+            }
         }
 
         protected override void OnConnectionClosed(MsgConnectionClosed msg)
@@ -89,7 +109,11 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnLapCompleted(LapInfo msg)
         {
-            base.OnLapCompleted(msg);
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnLapCompleted Called: {TimeSpan.FromMilliseconds(msg.Laptime).ToString()}");
+            }
         }
 
         protected override void OnLapCompleted(MsgLapCompleted msg)

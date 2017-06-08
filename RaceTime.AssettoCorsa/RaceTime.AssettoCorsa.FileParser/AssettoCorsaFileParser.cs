@@ -28,7 +28,7 @@ namespace RaceTime.AssettoCorsa.FileParser
         public void StartFileParser()
         {
            // var test = ApiWrapperNet4.Get<object>("values");
-            var test2 = ApiWrapperNet4.Post<object>("values", new Lap());
+          //  var test2 = ApiWrapperNet4.Post<object>("test/getlap", new Lap());
 
             if (session == null) session = new Session();
 
