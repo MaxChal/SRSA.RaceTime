@@ -9,6 +9,7 @@ using RaceTime.Common.Models;
 using RaceTime.Common.Common;
 using RaceTime.AssettoCorsa.FileParser.Common;
 using System.Globalization;
+using RaceTime.AssettoCrosa.Common.Helpers;
 
 namespace RaceTime.AssettoCorsa.FileParser
 {
@@ -26,6 +27,9 @@ namespace RaceTime.AssettoCorsa.FileParser
 
         public void StartFileParser()
         {
+           // var test = ApiWrapperNet4.Get<object>("values");
+            var test2 = ApiWrapperNet4.Post<object>("values", new Lap());
+
             if (session == null) session = new Session();
 
             var file = Directory.GetFiles(@"E:\Games\Steam\steamapps\common\assettocorsa\server\logs\session").LastOrDefault();
