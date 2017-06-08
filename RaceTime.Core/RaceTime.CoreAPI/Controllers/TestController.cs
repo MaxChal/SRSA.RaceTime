@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceTime.Common.Models;
+using RaceTime.CoreAPI.Models;
 
 namespace RaceTime.CoreAPI.Controllers
 {  
@@ -12,6 +13,7 @@ namespace RaceTime.CoreAPI.Controllers
     [Route("api/test")]
     public class TestController : Controller
     {
+        RaceTimeContext db = new RaceTimeContext();
         // GET api/Test
         [HttpGet]
         public IEnumerable<string> Get()
@@ -31,10 +33,15 @@ namespace RaceTime.CoreAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        [Route("GetLap")]
+        [Route("AddLap")]
         public Lap Post([FromBody]Lap value)
         {
+            db.Laps.Add(new Laps() {
+                LapId = new Guid().ToString(),
+                LapLength = 1
+            });
 
+            db.SaveChanges();
             return value;
         }
 
