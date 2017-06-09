@@ -14,7 +14,7 @@ namespace RaceTime.AssettoCorsa.Test
         static void Main(string[] args)
         {
             var parser = new AssettoCorsaFileParser();
-            parser.StartFileParser();
+           // parser.StartFileParser();
 
             AcServerPluginManager pluginManager = new AcServerPluginManager();
             pluginManager.LoadInfoFromServerConfig();

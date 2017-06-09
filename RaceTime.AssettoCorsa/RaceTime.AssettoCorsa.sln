@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "acPlugins4net", "acPlugins4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceTime.AssettoCorsa.ServerPlugin", "RaceTime.AssettoCorsa.ServerPlugin\RaceTime.AssettoCorsa.ServerPlugin.csproj", "{51767FB2-A874-4997-90AF-529712027F28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceTime.AssettoCrosa.Common", "RaceTime.AssettoCrosa.Common\RaceTime.AssettoCrosa.Common.csproj", "{E8B7750C-8655-4CB1-ADBF-97012A96067F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceTime.AssettoCorsa.Common", "RaceTime.AssettoCrosa.Common\RaceTime.AssettoCorsa.Common.csproj", "{E8B7750C-8655-4CB1-ADBF-97012A96067F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -37,7 +37,8 @@ namespace RaceTime.CoreAPI.Controllers
         {
             db.Laps.Add(new Lap() {
                 LapId = Guid.NewGuid().ToString(),
-               LapLength = 1
+                LapLength = 1,
+                DBTimestamp = DateTime.Now
             });
 
             db.SaveChanges();

@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RaceTime.AssettoCrosa.Common\RaceTime.AssettoCrosa.Common.csproj">
+    <ProjectReference Include="..\RaceTime.AssettoCrosa.Common\RaceTime.AssettoCorsa.Common.csproj">
       <Project>{e8b7750c-8655-4cb1-adbf-97012a96067f}</Project>
-      <Name>RaceTime.AssettoCrosa.Common</Name>
+      <Name>RaceTime.AssettoCorsa.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

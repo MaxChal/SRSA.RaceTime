@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RaceTime.Common">
+      <HintPath>..\..\RaceTime.Core\RaceTime.Common\bin\Debug\netstandard1.4\RaceTime.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +54,13 @@
       <Project>{755c6b0d-3ed5-45d3-a06f-1575d26da4d9}</Project>
       <Name>acPlugins4net</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RaceTime.AssettoCrosa.Common\RaceTime.AssettoCorsa.Common.csproj">
+      <Project>{e8b7750c-8655-4cb1-adbf-97012a96067f}</Project>
+      <Name>RaceTime.AssettoCorsa.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

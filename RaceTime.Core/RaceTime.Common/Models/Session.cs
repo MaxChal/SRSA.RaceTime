@@ -21,5 +21,9 @@ namespace RaceTime.Common.Models
         public string Weather { get; set; }
         public long? ElapsedMs { get; set; }
         public int? Timestamp { get; set; }
+        public bool? IsActive { get; set; }
+        public int? SessionIndex { get; set; }     
+        public int? CurrentSessionIndex { get; set; }        
+        public int? SessionCount { get; set; }
     }
 }

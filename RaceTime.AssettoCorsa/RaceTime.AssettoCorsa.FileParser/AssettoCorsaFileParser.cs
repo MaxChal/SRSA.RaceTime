@@ -9,7 +9,7 @@ using RaceTime.Common.Models;
 using RaceTime.Common.Common;
 using RaceTime.AssettoCorsa.FileParser.Common;
 using System.Globalization;
-using RaceTime.AssettoCrosa.Common.Helpers;
+using RaceTime.AssettoCorsa.Common.Helpers;
 
 namespace RaceTime.AssettoCorsa.FileParser
 {

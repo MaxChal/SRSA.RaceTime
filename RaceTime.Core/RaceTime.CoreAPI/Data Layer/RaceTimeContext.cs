@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RaceTime.Common.Models;
 
-namespace RaceTime.Common.Models
+namespace RaceTime.CoreAPI
 {
     public partial class RaceTimeContext : DbContext
     {

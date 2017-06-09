@@ -20,5 +20,6 @@ namespace RaceTime.Common.Models
         public string TyreCompound { get; set; }
         public int? ConnectionId { get; set; }
         public int? Timestamp { get; set; }
+        public DateTime? DBTimestamp { get; set; }
     }
 }

@@ -7,11 +7,20 @@ using acPlugins4net;
 using acPlugins4net.info;
 using acPlugins4net.messages;
 using System.IO;
+using Newtonsoft.Json;
+using RaceTime.Common.Helpers;
+using RaceTime.AssettoCorsa.Common;
+using RaceTime.AssettoCorsa.Common.Helpers;
+using RaceTime.Common.Models;
 
 namespace RaceTime.AssettoCorsa.ServerPlugin
 {
     public class RaceTimeACPlugin : AcServerPlugin
     {
+
+        public Session CurrentSession { get; set; }
+        public MsgLapCompletedLeaderboardEnty Leaderboard { get; set; }
+
         public RaceTimeACPlugin()
         {
             
@@ -40,12 +49,12 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnCarUpdate(DriverInfo driverInfo)
         {
-            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
-            using (var b = new StreamWriter(a))
-            {
-                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnCarUpdate Called {driverInfo.TotalTime} {driverInfo.Gap}");
-            }
-            base.OnCarUpdate(driverInfo);
+            //using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            //using (var b = new StreamWriter(a))
+            //{
+            //    b.WriteLine($"{DateTime.Now.TimeOfDay}: OnCarUpdate Called {driverInfo.TotalTime} {driverInfo.Gap}");
+            //}
+            //base.OnCarUpdate(driverInfo);
         }
 
         protected override void OnCarUpdate(MsgCarUpdate msg)
@@ -112,13 +121,30 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
             using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
             using (var b = new StreamWriter(a))
             {
-                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnLapCompleted Called: {TimeSpan.FromMilliseconds(msg.Laptime).ToString()}");
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnLapCompleted Called:{TimeSpan.FromMilliseconds(msg.Laptime).ToString()}");
             }
+
+            Lap lap = new Lap
+            {
+                LapId = Guid.NewGuid().ToString(),
+                CompetitorId = "",
+                ConnectionId = msg.ConnectionId,
+                Cuts = msg.Cuts,
+                GripLevel = msg.GripLevel,
+                LapTime = (int)msg.Laptime,
+                LapNo = msg.LapNo,
+                Timestamp = (int)msg.Timestamp,
+                Position = msg.Position,
+                IsValid = msg.Cuts == 0,
+                LapLength = msg.LapLength
+            };
+
+            var addLap = ApiWrapperNet4.Post<Lap>("lap/addlap", lap);
         }
 
         protected override void OnLapCompleted(MsgLapCompleted msg)
         {
-            base.OnLapCompleted(msg);
+            Leaderboard = msg.Leaderboard;
         }
 
         protected override void OnNewConnection(MsgNewConnection msg)
@@ -143,12 +169,50 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
 
         protected override void OnSessionEnded(MsgSessionEnded msg)
         {
-            base.OnSessionEnded(msg);
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnSessionEnded Called");
+            }
+
+            CurrentSession.IsActive = false;
+
+            var endSession = ApiWrapperNet4.Post<Session>("session/endSession", CurrentSession);
         }
 
         protected override void OnSessionInfo(MsgSessionInfo msg)
         {
-            base.OnSessionInfo(msg);
+            using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
+            using (var b = new StreamWriter(a))
+            {
+                b.WriteLine($"{DateTime.Now.TimeOfDay}: OnSessionInfo Called {JsonConvert.SerializeObject(msg)}");
+            }
+
+            CurrentSession = new Session
+            {
+                SessionId = Guid.NewGuid().ToString(),
+                EventId = "",
+                AmbientTemp = msg.AmbientTemp,
+                ElapsedMs = msg.ElapsedMS,
+                IsActive = true,
+                RoadTemp = msg.RoadTemp,
+                ServerName = msg.ServerName,
+                SessionDuration = msg.SessionDuration,
+                SessionLaps = msg.Laps,
+                SessionName = msg.Name,
+                SessionTrack = msg.Track,
+                SessionTrackConfig = msg.TrackConfig,
+                SessionType = msg.SessionType,
+                SessionWaitTime = msg.WaitTime,
+                Timestamp = DateTime.Now.TimeOfDay.Milliseconds,
+                Version = msg.Version,
+                CurrentSessionIndex = msg.CurrentSessionIndex,
+                SessionCount = msg.SessionCount,
+                SessionIndex = msg.SessionIndex,
+                Weather = msg.Weather
+            };
+
+            CurrentSession = ApiWrapperNet4.Post<Session>("session/addsession", CurrentSession);
         }
     }
 }
