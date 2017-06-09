@@ -7,7 +7,75 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
   <ItemGroup>
+    <Content Include="wwwroot\css\custom.min.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\css\default.min.css" />
+    <Content Include="wwwroot\css\layout.min.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\css\site.min.css" />
+    <Content Include="wwwroot\images\ajax-loading.gif" />
+    <Content Include="wwwroot\images\ajax-modal-loading.gif" />
+    <Content Include="wwwroot\images\arrow-down.png" />
+    <Content Include="wwwroot\images\avatar.png" />
+    <Content Include="wwwroot\images\avatar1.jpg" />
+    <Content Include="wwwroot\images\avatar10.jpg" />
+    <Content Include="wwwroot\images\avatar11.jpg" />
+    <Content Include="wwwroot\images\avatar1_small.jpg" />
+    <Content Include="wwwroot\images\avatar2.jpg" />
+    <Content Include="wwwroot\images\avatar3.jpg" />
+    <Content Include="wwwroot\images\avatar3_small.jpg" />
+    <Content Include="wwwroot\images\avatar4.jpg" />
+    <Content Include="wwwroot\images\avatar5.jpg" />
+    <Content Include="wwwroot\images\avatar6.jpg" />
+    <Content Include="wwwroot\images\avatar7.jpg" />
+    <Content Include="wwwroot\images\avatar8.jpg" />
+    <Content Include="wwwroot\images\avatar9.jpg" />
+    <Content Include="wwwroot\images\hor-menu-red-arrow.png" />
+    <Content Include="wwwroot\images\icon-color-close.png" />
+    <Content Include="wwwroot\images\icon-color.png" />
+    <Content Include="wwwroot\images\icon-img-down.png" />
+    <Content Include="wwwroot\images\icon-img-up.png" />
+    <Content Include="wwwroot\images\inbox-nav-arrow-blue.png" />
+    <Content Include="wwwroot\images\loading-spinner-blue.gif" />
+    <Content Include="wwwroot\images\loading-spinner-default.gif" />
+    <Content Include="wwwroot\images\loading-spinner-grey.gif" />
+    <Content Include="wwwroot\images\loading.gif" />
+    <Content Include="wwwroot\images\logo-big-white.png" />
+    <Content Include="wwwroot\images\logo-big.png" />
+    <Content Include="wwwroot\images\logo-invert.png" />
+    <Content Include="wwwroot\images\logo-light.png" />
+    <Content Include="wwwroot\images\logo.png" />
+    <Content Include="wwwroot\images\menu-toggler.png" />
+    <Content Include="wwwroot\images\photo1.jpg" />
+    <Content Include="wwwroot\images\photo2.jpg" />
+    <Content Include="wwwroot\images\photo3.jpg" />
+    <Content Include="wwwroot\images\remove-icon-small.png" />
+    <Content Include="wwwroot\images\search_icon_light.png" />
+    <Content Include="wwwroot\images\sidebar-menu-arrow-reverse.png" />
+    <Content Include="wwwroot\images\sidebar-menu-arrow-right.png" />
+    <Content Include="wwwroot\images\sidebar-menu-arrow.png" />
+    <Content Include="wwwroot\images\sidebar-toggle-light.png" />
+    <Content Include="wwwroot\images\sidebar_arrow_icon_light.png" />
+    <Content Include="wwwroot\images\sidebar_arrow_icon_light_rtl.png" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_blue.jpg" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_darkblue.jpg" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_default.jpg" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_grey.jpg" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_light.jpg" />
+    <Content Include="wwwroot\images\sidebar_inline_toggler_icon_light2.jpg" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_blue.png" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_darkblue.png" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_default.png" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_grey.png" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_light.png" />
+    <Content Include="wwwroot\images\sidebar_toggler_icon_light2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.4.337" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
