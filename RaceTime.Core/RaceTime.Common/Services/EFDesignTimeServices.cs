@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RaceTime.CoreAPI.Services
+namespace RaceTime.Common
 {
     /// <summary>
     /// If there is a class that implements IDesignTimeServices, 

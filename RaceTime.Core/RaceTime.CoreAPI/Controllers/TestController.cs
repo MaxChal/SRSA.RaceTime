@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceTime.Common.Models;
-using RaceTime.CoreAPI.Models;
 
 namespace RaceTime.CoreAPI.Controllers
 {  
@@ -36,13 +35,13 @@ namespace RaceTime.CoreAPI.Controllers
         [Route("AddLap")]
         public Lap Post([FromBody]Lap value)
         {
-            db.Laps.Add(new Laps() {
-                LapId = new Guid().ToString(),
-                LapLength = 1
+            db.Laps.Add(new Lap() {
+                LapId = Guid.NewGuid().ToString(),
+               LapLength = 1
             });
 
             db.SaveChanges();
-            return value;
+            return db.Laps.LastOrDefault() ;
         }
 
     }

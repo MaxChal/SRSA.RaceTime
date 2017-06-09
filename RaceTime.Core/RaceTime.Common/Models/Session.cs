@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using RaceTime.Common.Common;
 
 namespace RaceTime.Common.Models
 {
-    public class Session
+    public partial class Session
     {
-        public string SessionID { get; set; }
-        public string SessionName { get; set; }
+        public string SessionId { get; set; }
+        public string EventId { get; set; }
         public string ServerName { get; set; }
-        public string Track { get; set; }
-        public eSessionType SessionType { get; set; }
-        public int SessionLaps { get; set; }
-        public int SessionTime  { get; set; }
-        public List<Competitor> Competitors { get; set; }
-        
+        public string SessionName { get; set; }
+        public int? SessionType { get; set; }
+        public string SessionTrack { get; set; }
+        public int? SessionLaps { get; set; }
+        public int? SessionDuration { get; set; }
+        public int? SessionWaitTime { get; set; }
+        public string SessionTrackConfig { get; set; }
+        public int? Version { get; set; }
+        public int? AmbientTemp { get; set; }
+        public int? RoadTemp { get; set; }
+        public string Weather { get; set; }
+        public long? ElapsedMs { get; set; }
+        public int? Timestamp { get; set; }
     }
 }

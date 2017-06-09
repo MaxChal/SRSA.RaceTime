@@ -28,7 +28,7 @@ namespace RaceTime.AssettoCorsa.FileParser
         public void StartFileParser()
         {
            // var test = ApiWrapperNet4.Get<object>("values");
-             //var test2 = ApiWrapperNet4.Post<object>("test/addlap", new Lap());
+             var test2 = ApiWrapperNet4.Post<Lap>("test/addlap", new Lap());
 
             if (session == null) session = new Session();
 
@@ -92,14 +92,14 @@ namespace RaceTime.AssettoCorsa.FileParser
             if (!line.Contains("SENDING session name")) return;
             string serverName = session.ServerName;
 
-            session = new Session();
-            session.Competitors = new List<Competitor>();
-            session.SessionName = line.Remove(0, 23);
-            session.SessionID = sr.ReadLine().Remove(0, 24);
-            session.ServerName = serverName;
-            session.SessionType = (eSessionType)(int.Parse(sr.ReadLine().Remove(0, 23)) - 1);
-            session.SessionTime = int.Parse(sr.ReadLine().Remove(0, 23));
-            session.SessionLaps = int.Parse(sr.ReadLine().Remove(0, 23));
+            //session = new Session();
+            //session.Competitors = new List<Competitor>();
+            //session.SessionName = line.Remove(0, 23);
+            //session.SessionID = sr.ReadLine().Remove(0, 24);
+            //session.ServerName = serverName;
+            //session.SessionType = (eSessionType)(int.Parse(sr.ReadLine().Remove(0, 23)) - 1);
+            //session.SessionTime = int.Parse(sr.ReadLine().Remove(0, 23));
+            //session.SessionLaps = int.Parse(sr.ReadLine().Remove(0, 23));
 
         }
 
@@ -109,7 +109,7 @@ namespace RaceTime.AssettoCorsa.FileParser
             line = line.Remove(line.IndexOf('['));
             line = line.Remove(line.LastIndexOf(' '));
 
-            session.Track = line.Substring(line.LastIndexOf(' ') + 1);
+            //session.Track = line.Substring(line.LastIndexOf(' ') + 1);
             line = line.Remove(line.LastIndexOf(' '));
             line = line.Remove(line.LastIndexOf(' '));
             line = line.Remove(line.LastIndexOf(' '));
@@ -130,19 +130,19 @@ namespace RaceTime.AssettoCorsa.FileParser
 
             var driverName = line.GetDriverName();
 
-            if (session.Competitors.Any(comp => comp.CompetitorName.ToUpper() == driverName.ToUpper() && comp.CarName.ToUpper() == carName.ToUpper()))
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName.ToUpper() == driverName.ToUpper() && comp.CarName.ToUpper() == carName.ToUpper()).ActiveDriver = true;
-            else            
-                session.Competitors.Add(new Competitor
-                {
-                    ActiveDriver = true,
-                    CarName = carName,
-                    CompetitorName = driverName,
-                    Laps = new List<Lap>(),
-                    LapsCompleted = 0,
-                    LapsLead = 0,
-                    Position = 0
-                });
+            //if (session.Competitors.Any(comp => comp.CompetitorName.ToUpper() == driverName.ToUpper() && comp.CarName.ToUpper() == carName.ToUpper()))
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName.ToUpper() == driverName.ToUpper() && comp.CarName.ToUpper() == carName.ToUpper()).ActiveDriver = true;
+            //else            
+            //    session.Competitors.Add(new Competitor
+            //    {
+            //        ActiveDriver = true,
+            //        CarName = carName,
+            //        CompetitorName = driverName,
+            //        Laps = new List<Lap>(),
+            //        LapsCompleted = 0,
+            //        LapsLead = 0,
+            //        Position = 0
+            //    });
 
         }
 
@@ -161,16 +161,16 @@ namespace RaceTime.AssettoCorsa.FileParser
 
             var time = TimeSpan.FromMilliseconds(int.Parse(line));
 
-            if (sector == eSector.Sector1)
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.Add(new Lap
-                {
-                    Sector1 = time,
-                    TyreCompound = session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).CurrentTyre                    
-                });
-            else if (sector == eSector.Sector2)
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2 = time;
-            else if (sector == eSector.Sector3)
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector3 = time;
+            //if (sector == eSector.Sector1)
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.Add(new Lap
+            //    {
+            //        Sector1 = time,
+            //        TyreCompound = session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).CurrentTyre                    
+            //    });
+            //else if (sector == eSector.Sector2)
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2 = time;
+            //else if (sector == eSector.Sector3)
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector3 = time;
         }
 
         private void LapCompleted(StreamReader rs, string line)
@@ -196,30 +196,30 @@ namespace RaceTime.AssettoCorsa.FileParser
             sr.ReadLine();
             line = sr.ReadLine();
 
-            if (line.Contains("Invalid"))
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().IsValid = false;
-            else
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().IsValid = true;
+            //if (line.Contains("Invalid"))
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().IsValid = false;
+            //else
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().IsValid = true;
 
 
-            session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).LapsCompleted++;
-            session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().LapTime = lapTimeSpan;
-            session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().LapNumber = 
-                session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).LapsCompleted;
+            //session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).LapsCompleted++;
+            //session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().LapTime = lapTimeSpan;
+            //session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().LapNumber = 
+            //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).LapsCompleted;
 
-            switch (splitCount)
-            {
-                case 2:
-                    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2 = 
-                        lapTimeSpan - session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector1;
-                    break;
-                case 3:
-                    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector3 =
-                        lapTimeSpan - session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2;
-                    break;
-                default:
-                    break;
-            }
+            //switch (splitCount)
+            //{
+            //    case 2:
+            //        session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2 = 
+            //            lapTimeSpan - session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector1;
+            //        break;
+            //    case 3:
+            //        session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector3 =
+            //            lapTimeSpan - session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.LastOrDefault().Sector2;
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
 
 

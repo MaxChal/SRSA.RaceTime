@@ -2,18 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace RaceTime.CoreAPI.Models
+namespace RaceTime.Common.Models
 {
     public partial class RaceTimeContext : DbContext
     {
-        public virtual DbSet<Collisions> Collisions { get; set; }
-        public virtual DbSet<Competitors> Competitors { get; set; }
-        public virtual DbSet<Drivers> Drivers { get; set; }
-        public virtual DbSet<Events> Events { get; set; }
-        public virtual DbSet<Laps> Laps { get; set; }
-        public virtual DbSet<Pitstops> Pitstops { get; set; }
+        public virtual DbSet<Collision> Collisions { get; set; }
+        public virtual DbSet<Competitor> Competitors { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Lap> Laps { get; set; }
+        public virtual DbSet<Pitstop> Pitstops { get; set; }
         public virtual DbSet<Series> Series { get; set; }
-        public virtual DbSet<Sessions> Sessions { get; set; }
+        public virtual DbSet<Session> Sessions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,10 +23,9 @@ namespace RaceTime.CoreAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Collisions>(entity =>
+            modelBuilder.Entity<Collision>(entity =>
             {
-                entity.HasKey(e => e.CollisionId)
-                    .HasName("PK_Collisions");
+                entity.ToTable("Collisions", "dbo");
 
                 entity.Property(e => e.CollisionId)
                     .HasColumnName("CollisionID")
@@ -41,10 +40,9 @@ namespace RaceTime.CoreAPI.Models
                     .HasMaxLength(36);
             });
 
-            modelBuilder.Entity<Competitors>(entity =>
+            modelBuilder.Entity<Competitor>(entity =>
             {
-                entity.HasKey(e => e.CompetitorId)
-                    .HasName("PK_Competitors");
+                entity.ToTable("Competitors", "dbo");
 
                 entity.Property(e => e.CompetitorId)
                     .HasColumnName("CompetitorID")
@@ -79,10 +77,9 @@ namespace RaceTime.CoreAPI.Models
                     .HasMaxLength(36);
             });
 
-            modelBuilder.Entity<Drivers>(entity =>
+            modelBuilder.Entity<Driver>(entity =>
             {
-                entity.HasKey(e => e.DriverId)
-                    .HasName("PK_Drivers");
+                entity.ToTable("Drivers", "dbo");
 
                 entity.Property(e => e.DriverId)
                     .HasColumnName("DriverID")
@@ -93,10 +90,9 @@ namespace RaceTime.CoreAPI.Models
                 entity.Property(e => e.DriverName).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Events>(entity =>
+            modelBuilder.Entity<Event>(entity =>
             {
-                entity.HasKey(e => e.EventId)
-                    .HasName("PK_Events");
+                entity.ToTable("Events", "dbo");
 
                 entity.Property(e => e.EventId)
                     .HasColumnName("EventID")
@@ -113,10 +109,9 @@ namespace RaceTime.CoreAPI.Models
                     .HasMaxLength(36);
             });
 
-            modelBuilder.Entity<Laps>(entity =>
+            modelBuilder.Entity<Lap>(entity =>
             {
-                entity.HasKey(e => e.LapId)
-                    .HasName("PK_Laps");
+                entity.ToTable("Laps", "dbo");
 
                 entity.Property(e => e.LapId)
                     .HasColumnName("LapID")
@@ -131,10 +126,9 @@ namespace RaceTime.CoreAPI.Models
                 entity.Property(e => e.TyreCompound).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Pitstops>(entity =>
+            modelBuilder.Entity<Pitstop>(entity =>
             {
-                entity.HasKey(e => e.PitstopId)
-                    .HasName("PK_Pitstops");
+                entity.ToTable("Pitstops", "dbo");
 
                 entity.Property(e => e.PitstopId)
                     .HasColumnName("PitstopID")
@@ -147,6 +141,8 @@ namespace RaceTime.CoreAPI.Models
 
             modelBuilder.Entity<Series>(entity =>
             {
+                entity.ToTable("Series", "dbo");
+
                 entity.Property(e => e.SeriesId)
                     .HasColumnName("SeriesID")
                     .HasMaxLength(36);
@@ -158,10 +154,9 @@ namespace RaceTime.CoreAPI.Models
                 entity.Property(e => e.SeriesType).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Sessions>(entity =>
+            modelBuilder.Entity<Session>(entity =>
             {
-                entity.HasKey(e => e.SessionId)
-                    .HasName("PK_Sessions");
+                entity.ToTable("Sessions", "dbo");
 
                 entity.Property(e => e.SessionId)
                     .HasColumnName("SessionID")

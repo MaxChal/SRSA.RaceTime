@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RaceTime.CoreAPI.Models
+namespace RaceTime.Common.Models
 {
-    public partial class Collisions
+    public partial class Collision
     {
         public string CollisionId { get; set; }
         public string SessionId { get; set; }

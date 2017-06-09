@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RaceTime.Common.Models
 {
-    public class Event
+    public partial class Event
     {
-        public string EventID { get; set; }
+        public string EventId { get; set; }
+        public string SeriesId { get; set; }
         public string EventName { get; set; }
-        public List<Session> EventSessions { get; set; }
+        public string EventDescription { get; set; }
+        public string EventType { get; set; }
     }
 }

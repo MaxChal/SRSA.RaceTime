@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RaceTime.Common.Models
 {
-    public class Lap
+    public partial class Lap
     {
-        public int LapNumber { get; set; }
-        public TimeSpan LapTime { get; set; }
-        public TimeSpan Sector1 { get; set; }
-        public TimeSpan Sector2 { get; set; }
-        public TimeSpan Sector3 { get; set; }
-        public bool IsValid { get; set; }
+        public string LapId { get; set; }
+        public string CompetitorId { get; set; }
+        public int? LapTime { get; set; }
+        public int? Sector1 { get; set; }
+        public int? Sector2 { get; set; }
+        public int? Sector3 { get; set; }
+        public double? LapLength { get; set; }
+        public int? LapNo { get; set; }
+        public int? Position { get; set; }
+        public int? Cuts { get; set; }
+        public double? GripLevel { get; set; }
+        public bool? IsValid { get; set; }
         public string TyreCompound { get; set; }
+        public int? ConnectionId { get; set; }
+        public int? Timestamp { get; set; }
     }
 }

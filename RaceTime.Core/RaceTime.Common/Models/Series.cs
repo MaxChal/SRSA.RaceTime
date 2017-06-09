@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RaceTime.Common.Models
 {
-    public class Series
+    public partial class Series
     {
-        public string SeriesID { get; set; }
+        public string SeriesId { get; set; }
         public string SeriesName { get; set; }
-        public List<Event> SeriesEvents { get; set; }
+        public string SeriesDescription { get; set; }
+        public string SeriesType { get; set; }
     }
 }
