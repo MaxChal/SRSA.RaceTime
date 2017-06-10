@@ -17,21 +17,37 @@ namespace RaceTime.CoreAPI.Controllers
         // POST api/session/addsession
         [HttpPost]
         [Route("AddSession")]
-        public int AddSession([FromBody]Session value)
+        public Session AddSession([FromBody]Session value)
         {
             db.Sessions.Where(session => session.ServerName == value.ServerName && session.IsActive == true).ToList().ForEach(sesson => sesson.IsActive = false);
 
             db.Sessions.Add(value);
-            return db.SaveChanges();
+            db.SaveChanges();
+            return value;
         }
 
         // POST api/session/endsession
         [HttpPost]
         [Route("EndSession")]
-        public int EndSession([FromBody]Session value)
+        public Session EndSession([FromBody]Session value)
         {
             db.Sessions.FirstOrDefault(session => session.SessionId == value.SessionId).IsActive = false;
-            return db.SaveChanges();
+            db.SaveChanges();
+            return value;
+        }
+
+        // POST api/session/editsession
+        [HttpPost]
+        [Route("EditSession")]
+        public Session EditSession([FromBody]Session value)
+        {
+            if (db.Sessions.Any(s => s.SessionId == value.SessionId))
+            {
+                db.Sessions.Remove(db.Sessions.FirstOrDefault(session => session.SessionId == value.SessionId));
+                db.Sessions.Add(value);
+            } 
+            db.SaveChanges();
+            return value;
         }
     }
 }

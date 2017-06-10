@@ -9,6 +9,7 @@ namespace RaceTime.Common.Models
         public string SessionId { get; set; }
         public string DriverId { get; set; }
         public string DriverGuid { get; set; }
+        public string DriverName{ get; set; }
         public string DriverTeam { get; set; }
         public int? CarId { get; set; }
         public string CarModel { get; set; }
