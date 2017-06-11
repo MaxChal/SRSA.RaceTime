@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace RaceTime.CoreAPI
 {
@@ -29,6 +30,22 @@ namespace RaceTime.CoreAPI
         {
             // Add framework services.
             services.AddMvc();
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
+
+            // ********************
+            // Setup CORS
+            // ********************
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            //corsBuilder.WithOrigins("http://localhost:56573"); // for a specific url. Don't add a forward slash on the end!
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +55,10 @@ namespace RaceTime.CoreAPI
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseCors("SiteCorsPolicy");
+
+            app.UseWebSockets();
+            app.UseSignalR();
         }
     }
 }

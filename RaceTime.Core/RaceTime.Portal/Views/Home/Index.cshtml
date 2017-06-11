@@ -118,8 +118,50 @@
         <!-- BEGIN PAGE BASE CONTENT -->
         <div class="note note-info">
             <p> A Blank Page... Clean Slate </p>
+            <p> A Blank Page... Clean Slate </p>
         </div>
         <!-- END PAGE BASE CONTENT -->
     </div>
     <!-- END CONTENT BODY -->
 </div>
+
+@section Scripts {
+    @*Stuff comes here*@
+    <script src="~/lib/signalr/jquery.signalR.min.js" type="text/javascript"></script>
+   
+
+    <script>
+        $(function () {
+            //$.connection.hub.url = "http://localhost:17757/signalr";
+            //var broadcaster = $.connection.testHub;
+
+            //broadcaster.client.test = function (text) {
+            //    console.log(text);
+            //};
+
+            //$.connection.hub.start().done(function () {
+            //    broadcaster.server.try();
+            //});
+
+            var connection = $.hubConnection("http://localhost:17757");
+            //connection.hub.url = "http://localhost:17757/signalr";
+            var testHub = connection.createHubProxy('testHub');
+            testHub.on('test', function (text) {
+                console.log(text);
+            });
+            connection.start()
+                .done(function () {
+                    console.log('Now connected, connection ID=' + connection.id);
+                    testHub.invoke('try').done(function () {
+                        console.log('Invocation of NewContosoChatMessage succeeded');
+                    }).fail(function (error) {
+                        console.log('Invocation of NewContosoChatMessage failed. Error: ' + error);
+                    });
+                })
+                .fail(function () { console.log('Could not connect'); });
+
+
+          
+        });
+    </script>
+}

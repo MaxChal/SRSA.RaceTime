@@ -5,20 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceTime.Common.Models;
+using RaceTime.CoreAPI.Hubs;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
 
 namespace RaceTime.CoreAPI.Controllers
 {  
-    [Produces("application/json")]
     [Route("api/test")]
-    public class TestController : Controller
+    public class TestController : ApiHubController<TestHub>
     {
         RaceTimeContext db = new RaceTimeContext();
+
+        public TestController(IConnectionManager signalRConnectionManager)
+           : base(signalRConnectionManager)
+        {
+
+        }
+
+
         // GET api/Test
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task Get()
         {            
             Console.WriteLine("asd");
-            return new string[] { "value1", "value2" };
+            await Clients.All.Test("Test Message");
         }
 
         // GET api/Test/action
