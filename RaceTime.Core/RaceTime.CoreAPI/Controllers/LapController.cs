@@ -26,12 +26,36 @@ namespace RaceTime.CoreAPI.Controllers
         // POST api/lap/addlap
         [HttpPost]
         [Route("AddLap")]
-        public int AddLap([FromBody]Lap value)
+        public Lap AddLap([FromBody]Lap value)
         {
+            //new sector 1
+            if (value.LapTime == null && value.Sector2 == null)
+            {
+                while (db.Laps.Any(lap => lap.CompetitorId == value.CompetitorId && lap.LapTime == null))
+                {
+                    var delLap = db.Laps.FirstOrDefault(lap => lap.CompetitorId == value.CompetitorId && lap.LapTime == null);
+                    db.Laps.Remove(delLap);
+                    db.SaveChanges();
+                }
+            }
+
             SendLapAsync(value);
             db.Laps.Add(value);
             
-            return db.SaveChanges();
+            db.SaveChanges();
+            return value;
+        }
+
+
+        // POST api/lap/editlap
+        [HttpPost]
+        [Route("EditLap")]
+        public Lap EditLap([FromBody]Lap value)
+        {
+            SendLapAsync(value);
+            db.Entry(db.Laps.FirstOrDefault(lap => lap.LapId == value.LapId)).CurrentValues.SetValues(value);
+            db.SaveChanges();
+            return value;
         }
 
         public async Task SendLapAsync(Lap lap)

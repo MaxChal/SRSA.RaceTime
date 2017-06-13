@@ -7,6 +7,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_NewBackgroundProfile>False</_NewBackgroundProfile>
-    <_PublishTargetUrl>C:\Users\ebriedenhann\Documents\Eckardt\Personal Store\SRSA.RaceTime\RaceTime.Core\RaceTime.Portal\bin\Release\PublishOutput</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Projects\SRSA\SRSA.RaceTime\RaceTime.Core\RaceTime.Portal\bin\Release\PublishOutput</_PublishTargetUrl>
   </PropertyGroup>
 </Project>

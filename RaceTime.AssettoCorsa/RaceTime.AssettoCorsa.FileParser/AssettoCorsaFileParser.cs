@@ -10,6 +10,8 @@ using RaceTime.Common.Common;
 using RaceTime.AssettoCorsa.FileParser.Common;
 using System.Globalization;
 using RaceTime.AssettoCorsa.Common.Helpers;
+using RaceTime.AssettoCorsa.ServerPlugin;
+using RaceTime.Common.Enums;
 
 namespace RaceTime.AssettoCorsa.FileParser
 {
@@ -19,18 +21,18 @@ namespace RaceTime.AssettoCorsa.FileParser
         private StreamReader sr;
         private int count = 0;
         private Session session;
+        private RaceTimeACPlugin raceTimePlugin;
 
-        public AssettoCorsaFileParser()
+        public AssettoCorsaFileParser(RaceTimeACPlugin raceTimePlugin)
         {
-
+            this.raceTimePlugin = raceTimePlugin;
         }
 
         public void StartFileParser()
         {
-           // var test = ApiWrapperNet4.Get<object>("values");
-             var test2 = ApiWrapperNet4.Post<Lap>("test/addlap", new Lap());
+            var fileAlive = true;
 
-            if (session == null) session = new Session();
+           // if (session == null) session = new Session();
 
             var file = Directory.GetFiles(@"E:\Games\Steam\steamapps\common\assettocorsa\server\logs\session").LastOrDefault();
 
@@ -38,21 +40,20 @@ namespace RaceTime.AssettoCorsa.FileParser
             sr = new StreamReader(fs);
 
             string line;
+            line = sr.ReadToEnd();
 
-            while (true)
+            while (fileAlive)
             {
                 if ((line = sr.ReadLine()) != null)
                 {
                     switch (line)
                     {
-                        case "TCP packet 63":        //Connection Event
-                            AddCompetitor(sr, line);
-                            break;
+                       
                         case "TCP packet 88":        //Split Completed Event
                             AddSector(sr, line);
                             break;
                         case "TCP packet 73":        //Lap Completed Event
-                            LapCompleted(sr, line);
+                          //  LapCompleted(sr, line);
                             break;
                         case "TCP packet 130":       //Collision Event
                             break;
@@ -63,23 +64,30 @@ namespace RaceTime.AssettoCorsa.FileParser
                         case "NextSession":          //Next Session Event 
                             break;
                         case "REQ":                  //Server Name event    
-                            GetServerDetails(sr, line);
+                           // GetServerDetails(sr, line);
+                            break;
+                        case "TCP packet 63":        //Connection Event
+                           // AddCompetitor(sr, line);
                             break;
                         default:                     //Check default values
-                            GetSessionData(sr, line);
+                          //  GetSessionData(sr, line);
                             break;
-                    }
-
-                    using (var a = new FileStream("Test.txt", FileMode.Append, FileAccess.Write))
-                    using (var b = new StreamWriter(a))
-                    {
-                        b.WriteLine($"{count}: {line}");
-                    }
+                    }                    
                 }
                 else
                 {
                     count++;
                     Thread.Sleep(1000);
+                }
+
+                string lastfile = Directory.GetFiles(@"E:\Games\Steam\steamapps\common\assettocorsa\server\logs\session").LastOrDefault();
+                if (lastfile != file)
+                {
+                    sr.Close();
+                    fs.Close();
+                    file = lastfile;
+                    fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    sr = new StreamReader(fs);
                 }
             }
 
@@ -159,7 +167,9 @@ namespace RaceTime.AssettoCorsa.FileParser
 
             line = line.Remove(0, line.IndexOf(' ') + 1);
 
-            var time = TimeSpan.FromMilliseconds(int.Parse(line));
+            var time = int.Parse(line);
+
+            raceTimePlugin.AddSector(driverName, time, sector);
 
             //if (sector == eSector.Sector1)
             //    session.Competitors.FirstOrDefault(comp => comp.CompetitorName == driverName && comp.CarName == carName).Laps.Add(new Lap

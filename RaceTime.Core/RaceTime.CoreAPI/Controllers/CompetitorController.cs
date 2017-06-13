@@ -39,8 +39,25 @@ namespace RaceTime.CoreAPI.Controllers
         [Route("DisconnectCompetitor")]
         public Competitor DisconnectCompetitor([FromBody]Competitor value)
         {
-            db.Competitors.FirstOrDefault(comp => comp.CompetitorId == value.CompetitorId).IsConnected = false; 
+            db.Competitors.FirstOrDefault(comp => comp.CompetitorId == value.CompetitorId).IsConnected = false;
 
+            while (db.Laps.Any(lap => lap.CompetitorId == value.CompetitorId && lap.LapTime == null))
+            {
+                var delLap = db.Laps.FirstOrDefault(lap => lap.CompetitorId == value.CompetitorId && lap.LapTime == null);
+                db.Laps.Remove(delLap);
+                db.SaveChanges();
+            }
+
+            db.SaveChanges();
+            return value;
+        }
+
+        // POST api/Competitor/editcompetitor
+        [HttpPost]
+        [Route("EditCompetitor")]
+        public Competitor EditCompetitor([FromBody]Competitor value)
+        {            
+            db.Entry(db.Competitors.FirstOrDefault(comp => comp.CompetitorId == value.CompetitorId)).CurrentValues.SetValues(value);
             db.SaveChanges();
             return value;
         }

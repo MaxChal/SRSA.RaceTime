@@ -52,10 +52,17 @@
   <ItemGroup>
     <Compile Include="AssettoCorsaFileParser.cs" />
     <Compile Include="Common\Extensions.cs" />
-    <Compile Include="Enums\Sector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\acPlugins4net\acPlugins4net.csproj">
+      <Project>{755C6B0D-3ED5-45D3-A06F-1575D26DA4D9}</Project>
+      <Name>acPlugins4net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RaceTime.AssettoCorsa.ServerPlugin\RaceTime.AssettoCorsa.ServerPlugin.csproj">
+      <Project>{51767fb2-a874-4997-90af-529712027f28}</Project>
+      <Name>RaceTime.AssettoCorsa.ServerPlugin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RaceTime.AssettoCrosa.Common\RaceTime.AssettoCorsa.Common.csproj">
       <Project>{e8b7750c-8655-4cb1-adbf-97012a96067f}</Project>
       <Name>RaceTime.AssettoCorsa.Common</Name>

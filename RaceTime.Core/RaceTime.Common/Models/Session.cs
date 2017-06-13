@@ -7,6 +7,7 @@ namespace RaceTime.Common.Models
     {
         public string SessionId { get; set; }
         public string EventId { get; set; }
+        public string SessionGame { get; set; }
         public string ServerName { get; set; }
         public string SessionName { get; set; }
         public int? SessionType { get; set; }
