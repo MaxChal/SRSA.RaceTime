@@ -1,1 +1,60 @@
-﻿
+﻿.revert-lable-success {
+    background: #ffffff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #36c6d3 !important;
+    color: #36c6d3 !important;
+    margin: 0 1px 0 1px;
+    padding: 2px 5px 2px 5px !important;
+    text-align: center;
+}
+
+.revert-lable-warning {
+    background: #ffffff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #F1C40F !important;
+    color: #F1C40F !important;
+    margin: 0 1px 0 1px;
+    padding: 2px 5px 2px 5px !important;
+    text-align: center;
+}
+
+.revert-lable-info {
+    background: #ffffff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #659be0 !important;
+    color: #659be0 !important;
+    margin: 0 1px 0 1px;
+    padding: 2px 5px 2px 5px !important;
+    text-align: center;
+}
+
+.revert-lable-danger {
+    background: #ffffff !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #ed6b75 !important;
+    color: #ed6b75 !important;
+    margin: 0 1px 0 1px;
+    padding: 2px 5px 2px 5px !important;
+    text-align: center;
+}
+
+
+.lap-good-lable {
+    color: #00C200 !important;
+}
+
+.lap-bad-lable {
+    color: #C5C200 !important;
+}
+
+.lap-best-lable {
+    color: #C500C5 !important;
+
+.lap-invalid-lable {
+    color: #FF0000 !important;
+}
+

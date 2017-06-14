@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Home Page";   
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="page-content-wrapper">
@@ -10,114 +10,118 @@
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
                 <h1>
-                    Blank Page Layout
-                    <small>blank page layout</small>
+                    RaceTime Live
+                    <small>Live Timing Solution</small>
                 </h1>
             </div>
-            <!-- END PAGE TITLE -->
-            <!-- BEGIN PAGE TOOLBAR -->
-            <div class="page-toolbar">
-                <!-- BEGIN THEME PANEL -->
-                <div class="btn-group btn-theme-panel">
-                    <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-settings"></i>
-                    </a>
-                    <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-                                <h3>HEADER</h3>
-                                <ul class="theme-colors">
-                                    <li class="theme-color theme-color-default active" data-theme="default">
-                                        <span class="theme-color-view"></span>
-                                        <span class="theme-color-name">Dark Header</span>
-                                    </li>
-                                    <li class="theme-color theme-color-light " data-theme="light">
-                                        <span class="theme-color-view"></span>
-                                        <span class="theme-color-name">Light Header</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-8 col-sm-8 col-xs-12 seperator">
-                                <h3>LAYOUT</h3>
-                                <ul class="theme-settings">
-                                    <li>
-                                        Layout
-                                        <select class="layout-option form-control input-small input-sm">
-                                            <option value="fluid" selected="selected">Fluid</option>
-                                            <option value="boxed">Boxed</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Header
-                                        <select class="page-header-option form-control input-small input-sm">
-                                            <option value="fixed" selected="selected">Fixed</option>
-                                            <option value="default">Default</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Top Dropdowns
-                                        <select class="page-header-top-dropdown-style-option form-control input-small input-sm">
-                                            <option value="light">Light</option>
-                                            <option value="dark" selected="selected">Dark</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Sidebar Mode
-                                        <select class="sidebar-option form-control input-small input-sm">
-                                            <option value="fixed">Fixed</option>
-                                            <option value="default" selected="selected">Default</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Sidebar Menu
-                                        <select class="sidebar-menu-option form-control input-small input-sm">
-                                            <option value="accordion" selected="selected">Accordion</option>
-                                            <option value="hover">Hover</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Sidebar Position
-                                        <select class="sidebar-pos-option form-control input-small input-sm">
-                                            <option value="left" selected="selected">Left</option>
-                                            <option value="right">Right</option>
-                                        </select>
-                                    </li>
-                                    <li>
-                                        Footer
-                                        <select class="page-footer-option form-control input-small input-sm">
-                                            <option value="fixed">Fixed</option>
-                                            <option value="default" selected="selected">Default</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </div>
+
+        </div>
+        <!-- END PAGE HEAD-->
+        <!-- BEGIN PAGE BASE CONTENT -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN SAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-social-dribbble font-green"></i>
+                            <span class="caption-subject font-green bold uppercase">Server Name: Session</span>
+                        </div>                       
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-scrollable">
+                            <table class="table table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th> Pos </th>
+                                        <th> Driver Name </th>
+                                        <th> Gap / Diff </th>
+                                        <th> Best Lap </th>
+                                        <th> Last Lap </th>
+                                        <th> Sector 1 </th>
+                                        <th> Sector 2 </th>
+                                        <th> Sector 3 </th>
+                                        <th> Grip </th>
+                                        <th> Tyre Compound </th>       
+                                        <th> Pitstops </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> 1 </td>
+                                        <td> Eckardt </td>
+                                        <td> - </td>
+                                        <td> 1:30.14 </td>
+                                        <td><span class=" lap-best-lable"> 1:32.47 </span></td>
+                                        <td> 44.47 </td>
+                                        <td> 52.47 </td>
+                                        <td><span class=" lap-good-lable"> 11.48 </span></td>
+                                        <td> 97 % </td>
+                                        <td>
+                                            <span class="label label-sm revert-lable-success"> H</span>
+                                            <span class="label label-sm revert-lable-warning"> ST</span>
+                                            <span class="label label-sm revert-lable-info"> SM</span>
+                                            <span class="label label-sm label-success"> H </span>
+                                        </td>
+                                        <td> - </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 2 </td>
+                                        <td> Meh </td>
+                                        <td> +23.234 </td>
+                                        <td> 1:31.14 </td>
+                                        <td> 1:32.47 </td>
+                                        <td> 44.47 </td>
+                                        <td> 52.47 </td>
+                                        <td> 11.48 </td>
+                                        <td> 97 % </td>
+                                        <td>
+
+                                            <span class="label label-sm revert-lable-danger"> M</span>
+                                            <span class="label label-sm label-info"> SM </span>
+                                        </td>
+                                        <td> - </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 3 </td>
+                                        <td> Test </td>
+                                        <td> +1 Lap </td>
+                                        <td> 1:32.14 </td>
+                                        <td><span class="lap-invalid-lable"> 1:32.47 </span></td>
+                                        <td> 44.47 </td>
+                                        <td><span class=" lap-bad-lable"> 10.00 </span></td>
+                                        <td> 11.48 </td>
+                                        <td> 97 % </td>
+                                        <td>
+                                            <span class="label label-sm label-warning"> ST </span>
+                                        </td>
+                                        <td> - </td>
+                                    </tr>
+                                    <tr>
+                                        <td> 4 </td>
+                                        <td> This </td>
+                                        <td> +2 Laps </td>
+                                        <td> 1:35.14 </td>
+                                        <td> 1:38.47 </td>
+                                        <td> 44.47 </td>
+                                        <td> 52.47 </td>
+                                        <td> 11.48 </td>
+                                        <td> 96 % </td>
+                                        <td>
+                                            <span class="label label-sm label-danger"> M </span>
+                                        </td>
+                                        <td> - </td>
+                                    </tr>
+
+                                    
+                                   
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <!-- END THEME PANEL -->
+                <!-- END SAMPLE TABLE PORTLET-->
             </div>
-            <!-- END PAGE TOOLBAR -->
-        </div>
-        <!-- END PAGE HEAD-->
-        <!-- BEGIN PAGE BREADCRUMB -->
-        <ul class="page-breadcrumb breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <a href="#">Blank Page</a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <span class="active">Page Layouts</span>
-            </li>
-        </ul>
-        <!-- END PAGE BREADCRUMB -->
-        <!-- BEGIN PAGE BASE CONTENT -->
-        <div class="note note-info">
-            <p> A Blank Page... Clean Slate </p>
-            <p> A Blank Page... Clean Slate </p>
         </div>
         <!-- END PAGE BASE CONTENT -->
     </div>
@@ -131,7 +135,7 @@
 
     <script>
         $(function () {
-            
+
             //var connection = $.hubConnection("http://localhost:17757");
             var connection = $.hubConnection("http://racetimecoreapi");
             var testHub = connection.createHubProxy('assettoCorsaHub');
