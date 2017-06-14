@@ -13,7 +13,6 @@ using RaceTime.AssettoCorsa.Common;
 using RaceTime.AssettoCorsa.Common.Helpers;
 using RaceTime.Common.Models;
 using RaceTime.Common.Enums;
-using RaceTime.AssettoCorsa.ServerPlugin.Models;
 
 namespace RaceTime.AssettoCorsa.ServerPlugin
 {
@@ -301,6 +300,7 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
                 currentLap.Position = msg.Position;
                 currentLap.IsValid = msg.Cuts == 0;
                 currentLap.LapLength = msg.LapLength;
+                currentLap.TyreCompound = currentCompetitor.CurrentTyreCompound;
 
                 if (currentLap.Sector1 == default(int?)) currentLap.Sector1 = currentLap.LapTime;
                 else if (currentLap.Sector2 == default(int?)) currentLap.Sector2 = currentLap.LapTime - currentLap.Sector1;
@@ -322,7 +322,8 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
                     Timestamp = (int)msg.Timestamp,
                     Position = msg.Position,
                     IsValid = msg.Cuts == 0,
-                    LapLength = msg.LapLength
+                    LapLength = msg.LapLength,
+                    TyreCompound = currentCompetitor.CurrentTyreCompound
                 };
 
                 var addLap = ApiWrapperNet4.Post<Lap>("lap/addlap", lap);
@@ -535,6 +536,16 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
             {
 
             }
+        }
+
+        public void UpdateDriverTyreType(string driverName, string tyre)
+        {
+            var driver = Competitors.FirstOrDefault(comp => comp.DriverName == driverName);
+
+            if (driver == null) return;
+
+            driver.CurrentTyreCompound = tyre;
+            var result = ApiWrapperNet4.Post<Competitor>("competitor/editcompetitor", driver);
         }
     }
 }
