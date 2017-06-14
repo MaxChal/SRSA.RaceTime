@@ -17,3 +17,5 @@ RaceTime.AssettoCorsa/RaceTime.AssettoCrosa.Common/obj/
 RaceTime.Core/.vs/config/applicationhost.config
 RaceTime.Core/.vs/RaceTime.Core/v15/.suo
 RaceTime.AssettoCorsa/RaceTime.AssettoCrosa.Common/bin/
+RaceTime.AssettoCorsa/RaceTime.AssettoCorsa.WindowsService/bin/
+RaceTime.AssettoCorsa/RaceTime.AssettoCorsa.WindowsService/obj/
