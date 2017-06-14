@@ -366,7 +366,7 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
             //{
             //    b.WriteLine($"{DateTime.Now.TimeOfDay}: OnNewSession Called {msg.SessionType}");
             //}
-            PluginManager.EnableRealtimeReport((ushort)(PluginManager.RealtimeUpdateInterval * 5));
+           // PluginManager.EnableRealtimeReport((ushort)(PluginManager.RealtimeUpdateInterval * 5));
 
             CurrentSession = new Session
             {
@@ -441,7 +441,7 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
             //{
             //    b.WriteLine($"{DateTime.Now.TimeOfDay}: OnSessionInfo Called {JsonConvert.SerializeObject(msg)}");
             //}
-            PluginManager.EnableRealtimeReport((ushort)(PluginManager.RealtimeUpdateInterval * 5));
+           // PluginManager.EnableRealtimeReport((ushort)(PluginManager.RealtimeUpdateInterval * 5));
 
             if (CurrentSession != null)
             {
@@ -542,7 +542,7 @@ namespace RaceTime.AssettoCorsa.ServerPlugin
         {
             var driver = Competitors.FirstOrDefault(comp => comp.DriverName == driverName);
 
-            if (driver == null) return;
+            if (driver == null || driver?.CurrentTyreCompound == tyre) return;
 
             driver.CurrentTyreCompound = tyre;
             var result = ApiWrapperNet4.Post<Competitor>("competitor/editcompetitor", driver);

@@ -22,6 +22,7 @@ namespace RaceTime.AssettoCorsa.FileParser
         private int count = 0;
         private Session session;
         private RaceTimeACPlugin raceTimePlugin;
+        public bool FileAlive { get; set; }
 
         public AssettoCorsaFileParser(RaceTimeACPlugin raceTimePlugin)
         {
@@ -29,8 +30,7 @@ namespace RaceTime.AssettoCorsa.FileParser
         }
 
         public void StartFileParser()
-        {
-            var fileAlive = true;
+        {          
 
            // if (session == null) session = new Session();
 
@@ -42,7 +42,7 @@ namespace RaceTime.AssettoCorsa.FileParser
             string line;
             line = sr.ReadToEnd();
 
-            while (fileAlive)
+            while (FileAlive)
             {
                 if ((line = sr.ReadLine()) != null)
                 {

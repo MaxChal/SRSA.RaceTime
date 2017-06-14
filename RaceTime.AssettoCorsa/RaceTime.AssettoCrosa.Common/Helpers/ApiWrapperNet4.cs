@@ -6,13 +6,17 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace RaceTime.AssettoCorsa.Common.Helpers
 {
     public static class ApiWrapperNet4
     {
        // public static string ApiUrl = "http://localhost:17757/api/";
-        public static string ApiUrl = "http://racetimecoreapi/api/";
+       // public static string ApiUrl = "http://racetimecoreapi/api/";
+
+        public static string ApiUrl = ConfigurationManager.AppSettings["apipath"];
+
 
         public static T Get<T>(string url)
         {
