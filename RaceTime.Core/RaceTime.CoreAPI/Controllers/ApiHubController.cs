@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.SignalR.Infrastructure;
 
 namespace RaceTime.CoreAPI.Controllers
 {
-
     public abstract class ApiHubController<T> : Controller
      where T : Hub
     {

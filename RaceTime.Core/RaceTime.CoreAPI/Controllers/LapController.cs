@@ -12,7 +12,7 @@ namespace RaceTime.CoreAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Lap")]
-    public class LapController : ApiHubController<TestHub>
+    public class LapController : ApiHubController<AssettoCorsaHub>
     {
         RaceTimeContext db = new RaceTimeContext();
 
@@ -39,9 +39,11 @@ namespace RaceTime.CoreAPI.Controllers
                 }
             }
 
-            SendLapAsync(value);
+            if (value.LapTime == null) SendNewLapAsync(value);
+            else SendLapCompletedAsync(value);
+
             db.Laps.Add(value);
-            
+
             db.SaveChanges();
             return value;
         }
@@ -52,15 +54,29 @@ namespace RaceTime.CoreAPI.Controllers
         [Route("EditLap")]
         public Lap EditLap([FromBody]Lap value)
         {
-            SendLapAsync(value);
+
+            if (value.LapTime == null)   SendLapUpdatedAsync(value);
+            else SendLapCompletedAsync(value);
+            
+
             db.Entry(db.Laps.FirstOrDefault(lap => lap.LapId == value.LapId)).CurrentValues.SetValues(value);
             db.SaveChanges();
             return value;
         }
 
-        public async Task SendLapAsync(Lap lap)
+        public async Task SendLapCompletedAsync(Lap lap)
         {
-            await Clients.All.Test(lap);
+            await Clients.All.LapCompleted(lap);
+        }
+
+        public async Task SendLapUpdatedAsync(Lap lap)
+        {
+            await Clients.All.LapUpdated(lap);
+        }
+
+        public async Task SendNewLapAsync(Lap lap)
+        {
+            await Clients.All.NewLap(lap);
         }
     }
 }

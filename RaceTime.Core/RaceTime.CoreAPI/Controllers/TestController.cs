@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.SignalR.Infrastructure;
 namespace RaceTime.CoreAPI.Controllers
 {  
     [Route("api/test")]
-    public class TestController : ApiHubController<TestHub>
+    public class TestController : ApiHubController<AssettoCorsaHub>
     {
         RaceTimeContext db = new RaceTimeContext();
 

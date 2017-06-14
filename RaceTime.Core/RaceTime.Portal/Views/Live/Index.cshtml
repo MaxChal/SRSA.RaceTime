@@ -1,10 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Home Page";   
 }
 
-
 <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
+    @*<!-- BEGIN CONTENT BODY -->*@
     <div class="page-content">
         <!-- BEGIN PAGE HEAD-->
         <div class="page-head">
@@ -128,41 +127,74 @@
 @section Scripts {
     @*Stuff comes here*@
     <script src="~/lib/signalr/jquery.signalR.min.js" type="text/javascript"></script>
-   
+
 
     <script>
         $(function () {
-            //$.connection.hub.url = "http://localhost:17757/signalr";
-            //var broadcaster = $.connection.testHub;
+            
+            //var connection = $.hubConnection("http://localhost:17757");
+            var connection = $.hubConnection("http://racetimecoreapi");
+            var testHub = connection.createHubProxy('assettoCorsaHub');
 
-            //broadcaster.client.test = function (text) {
-            //    console.log(text);
-            //};
+            //Register Events
+            testHub.on('lapCompleted', LapCompletedEvent);
+            testHub.on('lapUpdated', LapUpdatedEvent);
+            testHub.on('newLap', NewLapEvent);
+            testHub.on('newCollision', NewCollisionEvent);
+            testHub.on('newCompetitor', NewCompetitorEvent);
+            testHub.on('updatedCompetitor', CompetitorUpdatedEvent);
+            testHub.on('disconnectedCompetitor', CompetitorDisconnectedEvent);
 
-            //$.connection.hub.start().done(function () {
-            //    broadcaster.server.try();
-            //});
-
-           // var connection = $.hubConnection("http://localhost:17757");
-           //// var connection = $.hubConnection("http://racetimecoreapi");            
-           // //connection.hub.url = "http://localhost:17757/signalr";
-           // var testHub = connection.createHubProxy('testHub');
-           // testHub.on('test', function (text) {
-           //     console.log(text);
-           // });
-           // connection.start()
-           //     .done(function () {
-           //         console.log('Now connected, connection ID=' + connection.id);
-           //         testHub.invoke('try').done(function () {
-           //             console.log('Invocation of NewContosoChatMessage succeeded');
-           //         }).fail(function (error) {
-           //             console.log('Invocation of NewContosoChatMessage failed. Error: ' + error);
-           //         });
-           //     })
-           //     .fail(function () { console.log('Could not connect'); });
-
-
-          
+            connection.start()
+                .done(function () {
+                    console.log('Now connected, connection ID=' + connection.id);
+                    testHub.invoke('try').done(function () {
+                        console.log('Invocation of NewContosoChatMessage succeeded');
+                    }).fail(function (error) {
+                        console.log('Invocation of NewContosoChatMessage failed. Error: ' + error);
+                    });
+                })
+                .fail(function () { console.log('Could not connect'); });
         });
+
+
+        // Server Push Events
+        function LapCompletedEvent(data) {
+            console.log("Lap Completed Recieved");
+            console.log(data);
+        }
+
+        function LapUpdatedEvent(data) {
+            console.log("Lap Updated Recieved");
+            console.log(data);
+        }
+
+        function NewLapEvent(data) {
+            console.log("New Lap Recieved");
+            console.log(data);
+        }
+
+        function NewCollisionEvent(data) {
+            console.log("New Collision Recieved");
+            console.log(data);
+        }
+
+        function NewCompetitorEvent(data) {
+            console.log("New Competitor Recieved");
+            console.log(data);
+        }
+
+        function CompetitorUpdatedEvent(data) {
+            console.log("Competitor Updated Recieved");
+            console.log(data);
+        }
+
+        function CompetitorDisconnectedEvent(data) {
+            console.log("Competitor Disconnected Recieved");
+            console.log(data);
+        }
+
+
     </script>
 }
+

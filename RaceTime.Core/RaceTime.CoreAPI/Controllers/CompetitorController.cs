@@ -5,14 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RaceTime.Common.Models;
+using RaceTime.CoreAPI.Hubs;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
 
 namespace RaceTime.CoreAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Competitor")]
-    public class CompetitorController : Controller
+    public class CompetitorController : ApiHubController<AssettoCorsaHub>
     {
         RaceTimeContext db = new RaceTimeContext();
+
+        public CompetitorController(IConnectionManager signalRConnectionManager)
+           : base(signalRConnectionManager)
+        {
+
+        }
 
         // POST api/Competitor/addcompetitor
         [HttpPost]
@@ -30,6 +38,8 @@ namespace RaceTime.CoreAPI.Controllers
             else
                 db.Competitors.Add(value);
 
+            SendNewCompetitorAsync(value);
+
             db.SaveChanges();
             return value;
         }
@@ -39,6 +49,7 @@ namespace RaceTime.CoreAPI.Controllers
         [Route("DisconnectCompetitor")]
         public Competitor DisconnectCompetitor([FromBody]Competitor value)
         {
+            SendDisconnectedCompetitorAsync(value);
             db.Competitors.FirstOrDefault(comp => comp.CompetitorId == value.CompetitorId).IsConnected = false;
 
             while (db.Laps.Any(lap => lap.CompetitorId == value.CompetitorId && lap.LapTime == null))
@@ -47,7 +58,7 @@ namespace RaceTime.CoreAPI.Controllers
                 db.Laps.Remove(delLap);
                 db.SaveChanges();
             }
-
+            
             db.SaveChanges();
             return value;
         }
@@ -56,10 +67,26 @@ namespace RaceTime.CoreAPI.Controllers
         [HttpPost]
         [Route("EditCompetitor")]
         public Competitor EditCompetitor([FromBody]Competitor value)
-        {            
+        {
+            SendUpdatedCompetitorAsync(value);
             db.Entry(db.Competitors.FirstOrDefault(comp => comp.CompetitorId == value.CompetitorId)).CurrentValues.SetValues(value);
             db.SaveChanges();
             return value;
+        }
+
+        public async Task SendNewCompetitorAsync(Competitor competitor)
+        {
+            await Clients.All.NewCompetitor(competitor);
+        }
+
+        public async Task SendDisconnectedCompetitorAsync(Competitor competitor)
+        {
+            await Clients.All.DisconnectedCompetitor(competitor);
+        }
+
+        public async Task SendUpdatedCompetitorAsync(Competitor competitor)
+        {
+            await Clients.All.UpdatedCompetitor(competitor);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RaceTime.CoreAPI.Hubs
 {
-    public class TestHub : Hub
+    public class AssettoCorsaHub : Hub
     {
         public override Task OnConnected()
         {
