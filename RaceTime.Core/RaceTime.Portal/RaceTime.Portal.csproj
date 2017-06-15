@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\css\about.css" />
+    <Content Include="wwwroot\css\about.min.css" />
     <Content Include="wwwroot\css\custom.min.css">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -16,7 +18,8 @@
     <Content Include="wwwroot\css\layout.min.css">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="wwwroot\css\site.min.css" />
+    <Content Include="wwwroot\global\js\jquery-ui.min.js" />
+    <Content Include="wwwroot\global\js\portlet-draggable.min.js" />
     <Content Include="wwwroot\images\ajax-loading.gif" />
     <Content Include="wwwroot\images\ajax-modal-loading.gif" />
     <Content Include="wwwroot\images\arrow-down.png" />
@@ -53,6 +56,16 @@
     <Content Include="wwwroot\images\photo1.jpg" />
     <Content Include="wwwroot\images\photo2.jpg" />
     <Content Include="wwwroot\images\photo3.jpg" />
+    <Content Include="wwwroot\images\portlet-collapse-icon-white.png" />
+    <Content Include="wwwroot\images\portlet-collapse-icon.png" />
+    <Content Include="wwwroot\images\portlet-config-icon-white.png" />
+    <Content Include="wwwroot\images\portlet-config-icon.png" />
+    <Content Include="wwwroot\images\portlet-expand-icon-white.png" />
+    <Content Include="wwwroot\images\portlet-expand-icon.png" />
+    <Content Include="wwwroot\images\portlet-reload-icon-white.png" />
+    <Content Include="wwwroot\images\portlet-reload-icon.png" />
+    <Content Include="wwwroot\images\portlet-remove-icon-white.png" />
+    <Content Include="wwwroot\images\portlet-remove-icon.png" />
     <Content Include="wwwroot\images\remove-icon-small.png" />
     <Content Include="wwwroot\images\search_icon_light.png" />
     <Content Include="wwwroot\images\sidebar-menu-arrow-reverse.png" />

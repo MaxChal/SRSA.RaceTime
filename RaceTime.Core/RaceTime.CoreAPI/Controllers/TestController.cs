@@ -27,7 +27,7 @@ namespace RaceTime.CoreAPI.Controllers
         public async Task Get()
         {            
             Console.WriteLine("asd");
-            await Clients.All.Test("Test Message");
+            await Clients.All.NewLap(new Lap());
         }
 
         // GET api/Test/action
