@@ -16,7 +16,7 @@
         <div class="page-head">
             <!-- BEGIN PAGE TITLE -->
             <div class="page-title">
-                <h1>
+                <h1 data-bind="text: TestText">
                     RaceTime Live
                     <small>Live Timing Solution</small>
                 </h1>
@@ -74,7 +74,7 @@
                                             <input type="checkbox" class="make-switch right" checked data-size="small" data-on-color="success" data-on-text="ON" data-off-color="default" data-off-text="OFF">
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
 
                             </div>
                         </div>
@@ -103,6 +103,7 @@
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"> </a>
+                            <a href="#basic" data-toggle="modal" class="config" data-original-title="" title=""> </a>
                             <a href="" class="fullscreen"> </a>
                             <a href="javascript:;" class="remove"> </a>
                         </div>
@@ -191,9 +192,6 @@
                                         </td>
                                         <td> - </td>
                                     </tr>
-
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -316,6 +314,25 @@
         </div>
 
     </div>
+
+    <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Modal Title</h4>
+                </div>
+                <div class="modal-body"> Modal body goes here </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn green">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <!-- END CONTENT BODY -->
 </div>
 
@@ -324,318 +341,9 @@
     <script src="~/global/js/jquery-ui.min.js" type="text/javascript"></script>
     <script src="~/global/js/portlet-draggable.min.js" type="text/javascript"></script>
     <script src="~/global/plugin/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
+    <script src="~/lib/knockout/dist/knockout.js"></script>
+    <script src="~/js/live/live.min.js"></script>
 
 
-    <script>
-        $(function () {
-            initializeSliders();
-            var connection = $.hubConnection("http://localhost:17757");
-            //var connection = $.hubConnection("http://racetimecoreapi");
-            var testHub = connection.createHubProxy('assettoCorsaHub');
-
-            //Register Events
-            testHub.on('lapCompleted', LapCompletedEvent);
-            testHub.on('lapUpdated', LapUpdatedEvent);
-            testHub.on('newLap', NewLapEvent);
-            testHub.on('newCollision', NewCollisionEvent);
-            testHub.on('newCompetitor', NewCompetitorEvent);
-            testHub.on('updatedCompetitor', CompetitorUpdatedEvent);
-            testHub.on('disconnectedCompetitor', CompetitorDisconnectedEvent);
-
-            connection.start()
-                .done(function () {
-                    console.log('Now connected, connection ID=' + connection.id);
-                    testHub.invoke('try').done(function () {
-                        console.log('Invocation of NewContosoChatMessage succeeded');
-                    }).fail(function (error) {
-                        console.log('Invocation of NewContosoChatMessage failed. Error: ' + error);
-                    });
-                })
-                .fail(function () { console.log('Could not connect'); });
-        });
-
-
-
-        // Server Push Events
-        function LapCompletedEvent(data) {
-            console.log("Lap Completed Recieved");
-            console.log(data);
-        }
-
-        function LapUpdatedEvent(data) {
-            console.log("Lap Updated Recieved");
-            console.log(data);
-        }
-
-        function NewLapEvent(data) {
-            console.log("New Lap Recieved");
-            console.log(data);
-        }
-
-        function NewCollisionEvent(data) {
-            console.log("New Collision Recieved");
-            console.log(data);
-        }
-
-        function NewCompetitorEvent(data) {
-            console.log("New Competitor Recieved");
-            console.log(data);
-        }
-
-        function CompetitorUpdatedEvent(data) {
-            console.log("Competitor Updated Recieved");
-            console.log(data);
-        }
-
-        function CompetitorDisconnectedEvent(data) {
-            console.log("Competitor Disconnected Recieved");
-            console.log(data);
-        }
-
-
-
-        function initializeSliders() {
-            $("#range_cols").ionRangeSlider({
-                min: 1,
-                max: 3,
-                from: 2,
-                onChange: function (data) {
-                    updateColCount(data);
-                }
-            });
-
-            $("#range_col1").ionRangeSlider({
-                min: 1,
-                max: 12,
-                from: 8,
-                step: 1,
-                from_max: 11,
-                onChange: function (data) {
-                    updateSliderCol1(data);
-                }
-            });
-
-            $("#range_col2").ionRangeSlider({
-                type: "double",
-                min: 1,
-                max: 12,
-                from: 8,
-                to: 12,
-                step: 1,
-                from_fixed: true,
-                to_min: 9,
-                to_max: 12,
-                onChange: function (data) {
-                    updateSliderCol2(data);
-                }
-            });
-
-            $("#range_col3").ionRangeSlider({
-                type: "double",
-                min: 1,
-                max: 12,
-                from: 10,
-                to: 12,
-                step: 1
-            });
-
-
-            $("#range_container_3").hide();
-        }
-
-        function updateColCount(data) {
-            if (data.from == 1) {
-                $("#range_container_2").hide();
-                $("#range_container_3").hide();
-
-                var slider = $("#range_col1").data("ionRangeSlider");
-                slider.update({
-                    min: 1,
-                    max: 12,
-                    from: 12,
-                    from_min: 12,
-                    from_max: 12,
-                    step: 1
-                });
-
-            }
-            else if (data.from == 2) {
-                $("#range_container_2").show();
-                $("#range_container_3").hide();
-
-                var slider = $("#range_col1").data("ionRangeSlider");
-                slider.update({
-                    min: 1,
-                    max: 12,
-                    from: 8,
-                    from_min: 0,
-                    from_max: 11,
-                    step: 1
-                });
-
-                var slider = $("#range_col2").data("ionRangeSlider");
-                slider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: 8,
-                    to: 12,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 9,
-                    to_max: 12
-                });
-            }
-            else {
-                $("#range_container_2").show();
-                $("#range_container_3").show();
-
-                var slider = $("#range_col1").data("ionRangeSlider");
-                slider.update({
-                    min: 1,
-                    max: 12,
-                    from: 6,
-                    from_min: 0,
-                    from_max: 10,
-                    step: 1
-                });
-
-                var slider = $("#range_col2").data("ionRangeSlider");
-                slider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: 6,
-                    to: 9,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 7,
-                    to_max: 11
-                });
-
-                var slider = $("#range_col3").data("ionRangeSlider");
-                slider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: 9,
-                    to: 12,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 10,
-                    to_max: 12
-                });
-            }
-            updateGridDisplay();
-
-        }
-
-        function updateSliderCol1(data) {
-            var slider = $("#range_cols").data("ionRangeSlider");
-            if (slider.old_from == 2) {
-                var updateSlider = $("#range_col2").data("ionRangeSlider");
-                updateSlider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: data.from,
-                    to: 12,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 12,
-                    to_max: 12
-                });
-            }
-            else if (slider.old_from == 3) {
-                var updateSlider = $("#range_col2").data("ionRangeSlider");
-                var updateSlider2 = $("#range_col3").data("ionRangeSlider");
-
-                updateSlider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: data.from,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: data.from + 1,
-                    to_max: 11
-                });
-
-                updateSlider2.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: updateSlider.old_to,
-                    to: 12,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 12,
-                    to_max: 12
-                });
-            }
-
-            updateGridDisplay();
-        }
-
-        function updateSliderCol2(data) {
-            var slider = $("#range_cols").data("ionRangeSlider");
-            if (slider.old_from == 3) {
-                var updateSlider = $("#range_col3").data("ionRangeSlider");
-
-                updateSlider.update({
-                    type: "double",
-                    min: 1,
-                    max: 12,
-                    from: data.to,
-                    to: 12,
-                    step: 1,
-                    from_fixed: true,
-                    to_min: 12,
-                    to_max: 12
-                });
-            }
-            updateGridDisplay();
-
-        }
-
-        function updateGridDisplay() {
-            var slider = $("#range_cols").data("ionRangeSlider");
-            if (slider.old_from == 1) {
-                document.getElementById('col1').className = "col-md-12 column sortable";
-                $('#col2').hide();
-                $('#col3').hide();
-            }
-            else if (slider.old_from == 2) {
-                $('#col2').show();
-                $('#col3').hide();
-
-                var slider = $("#range_col1").data("ionRangeSlider");
-                document.getElementById('col1').className = "col-md-" + slider.old_from + " column sortable";
-
-                var slider = $("#range_col2").data("ionRangeSlider");
-                var value = slider.result.to - slider.result.from;
-                document.getElementById('col2').className = "col-md-" + value + " column sortable";
-            }
-
-            else if (slider.old_from == 3) {
-                $('#col2').show();
-                $('#col3').show();
-
-                var slider = $("#range_col1").data("ionRangeSlider");
-                document.getElementById('col1').className = "col-md-" + slider.old_from + " column sortable";
-
-                slider = $("#range_col2").data("ionRangeSlider");
-                value = slider.result.to - slider.result.from;
-                document.getElementById('col2').className = "col-md-" + value + " column sortable";
-
-                slider = $("#range_col3").data("ionRangeSlider");
-                value = slider.result.to - slider.result.from;
-                document.getElementById('col3').className = "col-md-" + value + " column sortable";
-            }
-
-        }
-
-
-    </script>
 }
 
